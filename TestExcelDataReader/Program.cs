@@ -58,9 +58,10 @@ namespace TestExcelDataReader
                     {
                         foreach (DataRow row in table.Rows)
                         {
-
                             var newRow = dataTable.NewRow();
-                            object[] extend = { fileInfo.Name, table.TableName, table.Rows.IndexOf(row) + 1 };
+                            var extend = new List<object> { fileInfo.Name, table.TableName, table.Rows.IndexOf(row) + 1 };
+                            var origin = row.ItemArray.ToList();
+                            var source = extend.AddRange(origin);
 
                             Console.WriteLine($"{columnCount} {row.ItemArray.Length.ToString()}");
 
